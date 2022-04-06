@@ -4,7 +4,7 @@ import TitlePokemon from '../components/TitlePokemon';
 import { FlatList, Button, ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 
 
-export default function Home() {
+export default function Home({navigation}) {
 
     const [listpokemon, setListPokemon] = useState([])
     const [nextPage, setNextPage] = useState("https://pokeapi.co/api/v2/pokemon")
@@ -32,7 +32,7 @@ export default function Home() {
             numColumns = {2}
             contentContainerStyle = {styles.suce}
             keyExtractor={(item) => item.name}
-            renderItem={({item}) => <TitlePokemon style={styles.listing} name={item.name} url={item.url}/>}
+            renderItem={({item}) => <TitlePokemon style={styles.listing} name={item.name} url={item.url} navigation={navigation}/>}
             onEndReached={() =>{
             loadPokemon(nextPage)
             }}

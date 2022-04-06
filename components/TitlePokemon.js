@@ -1,4 +1,4 @@
-import {StyleSheet, Text, Image, View} from "react-native"
+import {StyleSheet, Text, Image, View, TouchableOpacity} from "react-native"
 import React, { useState } from 'react';
 import baseImage from "../assets/pokedex.jpg";
 import { getPokemons } from "../api/api";
@@ -6,23 +6,28 @@ import { borderEndColor } from "react-native/Libraries/Components/View/ReactNati
 
 export default function TitlePokemon(props) {
 
-    const { url, name, ...restProps} = props
+    const { url, name, navigation, ...restProps} = props
     const [pokemonDatas, setPokemonDatas] = useState([])
     const [pokemonImage, setPokemonImage] = useState(null)
+    const [pokemonType, setPokemonType] = useState(null)
+
 
     if (pokemonDatas.length === 0) {
         getPokemons(url).then(data => {
             setPokemonImage(data.sprites)
+            setPokemonType(data.types[0].type.name)
         })
     }
 
   return (
     <View style={styles.card}>
-        {pokemonImage
-        ? <Image style={styles.img} source={{uri: pokemonImage.front_default}}/> 
-        : <Image style={{ width: 100, height: 100 }} source={baseImage}/> 
-        }
-        <Text style={styles.tex}>{name}</Text>
+      <TouchableOpacity onPress={()=> navigation.navigate('Détails', {name: name, image: pokemonImage.front_default, type:pokemonType})}>
+          {pokemonImage
+          ? <Image style={styles.img} source={{uri: pokemonImage.front_default}}/> 
+          : <Image style={{ width: 100, height: 100 }} source={baseImage}/> 
+          }
+          <Text style={styles.tex}>{name}</Text>
+        </TouchableOpacity>
     </View>
   );
 }

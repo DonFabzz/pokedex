@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabRouter } from 'react-navigation';
+import Detail from '../components/Detail'
 import Home from '../screens/Home';
 
 const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ function PokemonStack() {
         
         <Stack.Navigator>
             <Stack.Screen name="Pokedex" component={Home} />
+            <Stack.Screen name="Détails" component={Detail} />
         </Stack.Navigator>
     )
 }
