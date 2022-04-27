@@ -21,7 +21,7 @@ export default function Home({navigation}) {
     }
 
     useEffect(() => {
-    loadPokemon(nextPage)
+        loadPokemon(nextPage)
     }, []);
 
     return(

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, Image, View, TouchableOpacity} from "react-native"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import baseImage from "../assets/pokedex.jpg";
 import { getPokemons } from "../api/api";
 import { borderEndColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
@@ -11,13 +11,13 @@ export default function TitlePokemon(props) {
     const [pokemonImage, setPokemonImage] = useState(null)
     const [pokemonType, setPokemonType] = useState(null)
 
-
-    if (pokemonDatas.length === 0) {
+    useEffect(()=>{
         getPokemons(url).then(data => {
             setPokemonImage(data.sprites)
             setPokemonType(data.types[0].type.name)
         })
-    }
+    }, [])
+   
 
   return (
     <View style={styles.card}>
